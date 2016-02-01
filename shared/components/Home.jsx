@@ -1,9 +1,9 @@
-import React, { Component , PropTypes }   from 'react';
-import TodosView              from './TodosView';
-import TodosForm              from './TodosForm';
+import React, { Component , PropTypes } from 'react';
+import TodosView from './TodosView';
+import TodosForm from './TodosForm';
 import { bindActionCreators } from 'redux';
-import * as TodoActions       from 'actions/TodoActions';
-import { connect }            from 'react-redux';
+import * as TodoActions from 'actions/TodoActions';
+import { connect } from 'react-redux';
 
 class Home extends Component {
   static propTypes = {
@@ -20,11 +20,8 @@ class Home extends Component {
 
     return (
       <div id="todo-list">
-        <TodosView todos={todos}
-          {...bindActionCreators(TodoActions, dispatch)} />
-
-        <TodosForm
-          {...bindActionCreators(TodoActions, dispatch)}/>
+        <TodosView todos={todos} {...bindActionCreators(TodoActions, dispatch)}/>
+        <TodosForm {...bindActionCreators(TodoActions, dispatch)}/>
       </div>
     );
   }

@@ -1,6 +1,6 @@
-import * as reducers from 'reducers';
+import * as reducers from './reducers';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import promiseMiddleware from 'lib/promiseMiddleware';
+import promiseMiddleware from './lib/promiseMiddleware';
 
 function direct (clientCallback, serverCallback) {
   try {

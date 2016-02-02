@@ -3,21 +3,27 @@ import React from 'react';
 import { renderToString } from 'react-dom/server'
 import { RoutingContext, match } from 'react-router';
 import createLocation from 'history/lib/createLocation';
-import routes from 'routes';
+import routes from './routes';
 import { Provider } from 'react-redux';
-import promiseMiddleware from 'lib/promiseMiddleware';
-import fetchComponentData from 'lib/fetchComponentData';
+import promiseMiddleware from './lib/promiseMiddleware';
+import fetchComponentData from './lib/fetchComponentData';
 import path from 'path';
-import configureStore from 'configureStore'
+import configureStore from './configureStore'
 import config from '../config'
+import webpackDev from '../webpack.dev'
+import bodyParser from 'body-parser'
+
+// Handlers
+import todosCreateHandler from './handlers/api/v1/todos/create'
 
 const app = express();
 
 if (config.nodeEnv !== 'production') {
-  require('../webpack.dev').default(app);
+  webpackDev(app);
 }
 
 app.use(express.static(path.join(__dirname, 'dist')));
+app.use(bodyParser.json());
 
 app.use((req, res) => {
   const location = createLocation(req.url);
@@ -40,25 +46,23 @@ app.use((req, res) => {
       );
 
       const componentHTML = renderToString(InitialView);
-
       const initialState = store.getState();
-
       const HTML = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta charset="utf-8">
-          <title>Redux Demo</title>
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <title>Redux Demo</title>
 
-          <script>
-            window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
-          </script>
-        </head>
-        <body>
-          <div id="react-view">${componentHTML}</div>
-          <script type="application/javascript" src="/bundle.js"></script>
-        </body>
-      </html>
+            <script>
+              window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
+            </script>
+          </head>
+          <body>
+            <div id="react-view">${componentHTML}</div>
+            <script type="application/javascript" src="/bundle.js"></script>
+          </body>
+        </html>
       `;
 
       return HTML;
@@ -70,5 +74,7 @@ app.use((req, res) => {
       .catch(err => res.end(err.message));
   });
 });
+
+app.post('/api/v1/todos', todosCreateHandler());
 
 export default app;

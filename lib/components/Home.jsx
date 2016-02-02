@@ -2,7 +2,7 @@ import React, { Component , PropTypes } from 'react';
 import TodosView from './TodosView';
 import TodosForm from './TodosForm';
 import { bindActionCreators } from 'redux';
-import * as TodoActions from 'actions/TodoActions';
+import * as TodoActions from '../actions/TodoActions';
 import { connect } from 'react-redux';
 
 class Home extends Component {

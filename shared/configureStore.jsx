@@ -2,24 +2,33 @@ import * as reducers from 'reducers';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import promiseMiddleware from 'lib/promiseMiddleware';
 
-function getDebugSessionKey() {
-  // You can write custom logic here!
-  // By default we try to read the key from ?debug_session=<key> in the address bar
+function direct (clientCallback, serverCallback) {
   try {
-    const matches = window.location.href.match(/[?&]debug_session=([^&]+)\b/);
-    return (matches && matches.length > 0)? matches[1] : null;
+    window;
+    clientCallback(window);
   } catch (e) {
-    console.log('catch');
+    serverCallback();
   }
 }
 
 export default function configureStore(initialState) {
-  const enhancer = compose(
-    applyMiddleware(promiseMiddleware),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
-  )
-  const reducer = combineReducers(reducers);
-  const store = createStore(reducer, initialState, enhancer);
+  let enhancer;
+  direct(
+    (window) => {
+      enhancer = compose(
+        applyMiddleware(promiseMiddleware),
+        window.devToolsExtension ? window.devToolsExtension() : f => f
+      )
+    },
+    () => {
+      enhancer = compose(
+        applyMiddleware(promiseMiddleware)
+      )
+    }
+  );
+
+  let reducer = combineReducers(reducers);
+  let store = createStore(reducer, initialState, enhancer);
 
   // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
   if (module.hot) {

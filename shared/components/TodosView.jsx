@@ -4,8 +4,8 @@ import Immutable     from 'immutable';
 
 export default class TodosView extends React.Component {
   static propTypes = {
-    todos:         PropTypes.instanceOf(Immutable.List).isRequired,
-    editTodo:   PropTypes.func.isRequired,
+    todos: PropTypes.instanceOf(Immutable.List).isRequired,
+    editTodo: PropTypes.func.isRequired,
     deleteTodo: PropTypes.func.isRequired
   };
 
@@ -27,7 +27,7 @@ export default class TodosView extends React.Component {
 
   render() {
     const btnStyle = {
-      'margin': '1em 0 1em 1em'
+      /* 'margin': '1em 0 1em 1em' */
     };
 
     return (

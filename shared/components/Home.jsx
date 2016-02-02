@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 class Home extends Component {
   static propTypes = {
-    todos:    PropTypes.any.isRequired,
+    todos: PropTypes.any.isRequired,
     dispatch: PropTypes.func.isRequired
   };
 

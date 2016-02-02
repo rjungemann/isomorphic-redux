@@ -1,11 +1,11 @@
 'use strict';
 
-require('babel-core/register')({});
+var register = require('babel-core/register')
+var config = require('./config');
+var server = require('./lib/server');
 
-var server = require('./server').default;
+register({});
 
-const PORT = process.env.PORT || 3000;
-
-server.listen(PORT, function () {
-  console.log('Server listening on: ' + PORT);
+server.default.listen(config.port, function () {
+  console.log('Server listening on: ' + config.port);
 });

@@ -10,8 +10,6 @@ export default class MainView extends React.Component {
       <div id="main-view">
         <h1>Todos</h1>
 
-        <hr />
-
         {this.props.children}
       </div>
     );

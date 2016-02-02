@@ -9,16 +9,17 @@ import promiseMiddleware from 'lib/promiseMiddleware';
 import fetchComponentData from 'lib/fetchComponentData';
 import path from 'path';
 import configureStore from 'configureStore'
+import config from '../config'
 
 const app = express();
 
-if (process.env.NODE_ENV !== 'production') {
-  require('./webpack.dev').default(app);
+if (config.nodeEnv !== 'production') {
+  require('../webpack.dev').default(app);
 }
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
-app.use( (req, res) => {
+app.use((req, res) => {
   const location = createLocation(req.url);
   const store = configureStore();
 

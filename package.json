@@ -1,15 +1,18 @@
 {
   "name": "isomorphic-redux",
   "version": "1.0.0",
-  "repository": "https://github.com/bananaoomarang/isomorphic-redux",
+  "repository": "https://github.com/rjungemann/isomorphic-redux",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production NODE_PATH=$NODE_PATH:./shared node --harmony .",
     "dev": "NODE_PATH=$NODE_PATH:./shared node --harmony .",
-    "build": "NODE_ENV=production webpack --progress --color -p --config webpack.prod.config.js"
+    "build": "NODE_ENV=production webpack --progress --color -p --config webpack.prod.config.js",
+    "db:create": "node scripts/db/create.js",
+    "db:drop": "node scripts/db/drop.js",
+    "db:migrate": "node scripts/db/migrate.js"
   },
-  "author": "Milo Mordaunt <milomord@gmail.com>",
+  "author": "Roger Jungemann <roger@thefifthcircuit.com>",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.8.1",
@@ -25,7 +28,9 @@
     "express": "^4.13.3",
     "history": "^1.17.0",
     "immutable": "^3.7.6",
+    "node-pg-migrate": "0.0.9",
     "object-assign": "^4.0.1",
+    "pg": "^4.4.4",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.2",
@@ -37,6 +42,7 @@
     "babel-eslint": "^5.0.0-beta6",
     "eslint": "^1.10.3",
     "eslint-plugin-react": "^3.12.0",
+    "node-pg-migrate": "0.0.9",
     "react-transform-hmr": "^1.0.1",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.6.0"

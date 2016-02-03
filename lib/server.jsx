@@ -1,7 +1,7 @@
 import express from 'express';
 import React from 'react';
 import { renderToString } from 'react-dom/server'
-import { RoutingContext, match } from 'react-router';
+import { RouterContext, match } from 'react-router';
 import createLocation from 'history/lib/createLocation';
 import routes from './routes';
 import { Provider } from 'react-redux';
@@ -41,7 +41,7 @@ app.use((req, res) => {
     function renderView() {
       const InitialView = (
         <Provider store={store}>
-          <RoutingContext {...renderProps} />
+          <RouterContext {...renderProps} />
         </Provider>
       );
 

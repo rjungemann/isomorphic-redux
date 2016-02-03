@@ -5,7 +5,10 @@ module.exports = {
     './lib/client'
   ],
   resolve: {
-    modulesDirectories: ['node_modules', 'lib', 'shared'],
+    modulesDirectories: [
+      path.join(__dirname, 'node_modules', 'warning'),
+      'node_modules', 'lib'
+    ],
     extensions: ['', '.js', '.jsx']
   },
   output: {

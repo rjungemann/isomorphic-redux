@@ -6,8 +6,8 @@ module.exports = {
   ],
   resolve: {
     modulesDirectories: [
-      path.join(__dirname, 'node_modules', 'warning'),
-      'node_modules', 'lib'
+      'node_modules',
+      'app'
     ],
     extensions: ['', '.js', '.jsx']
   },

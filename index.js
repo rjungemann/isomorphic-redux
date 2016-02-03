@@ -2,7 +2,7 @@
 
 var register = require('babel-core/register')
 var config = require('./config');
-var server = require('./lib/server');
+var server = require('./app/server');
 
 register({});
 

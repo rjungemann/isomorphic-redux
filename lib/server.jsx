@@ -1,7 +1,7 @@
 import express from 'express';
 import React from 'react';
 import { renderToString } from 'react-dom/server'
-import { RouterContext, match } from 'react-router';
+import { RouterContext, match, createMemoryHistory } from 'react-router';
 import createLocation from 'history/lib/createLocation';
 import routes from './routes';
 import { Provider } from 'react-redux';
@@ -27,7 +27,8 @@ app.use(bodyParser.json());
 
 app.use((req, res) => {
   const location = createLocation(req.url);
-  const store = configureStore();
+  const history = createMemoryHistory();
+  const store = configureStore(undefined, history);
 
   match({ routes, location }, (err, redirectLocation, renderProps) => {
     if(err) {

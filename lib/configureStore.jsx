@@ -1,6 +1,7 @@
 import * as reducers from './reducers';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import promiseMiddleware from './lib/promiseMiddleware';
+import { syncHistory, routeReducer } from 'react-router-redux';
 
 function direct (clientCallback, serverCallback) {
   try {
@@ -11,24 +12,30 @@ function direct (clientCallback, serverCallback) {
   }
 }
 
-export default function configureStore(initialState) {
+export default function configureStore(initialState, history) {
+  let router = syncHistory(history);
   let enhancer;
   direct(
     (window) => {
       enhancer = compose(
-        applyMiddleware(promiseMiddleware),
+        applyMiddleware(router, promiseMiddleware),
         window.devToolsExtension ? window.devToolsExtension() : f => f
       )
     },
     () => {
       enhancer = compose(
-        applyMiddleware(promiseMiddleware)
+        applyMiddleware(router, promiseMiddleware)
       )
     }
   );
 
-  let reducer = combineReducers(reducers);
-  let store = createStore(reducer, initialState, enhancer);
+  const reducer = combineReducers(Object.assign({}, reducers, {
+    routing: routeReducer
+  }));
+  const store = createStore(reducer, initialState, enhancer);
+
+  // Required for replaying actions from devtools to work
+  router.listenForReplays(store)
 
   // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
   if (module.hot) {

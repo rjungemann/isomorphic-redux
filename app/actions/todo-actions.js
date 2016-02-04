@@ -1,17 +1,17 @@
 import request from 'axios';
 
-const API_URL = 'https://webtask.it.auth0.com/api/run/wt-milomord-gmail_com-0/redux-tutorial-backend?webtask_no_cache=1';
+const API_URL = 'http://localhost:3000/api/v1/todos';
 
 export function getTodos() {
   return {
-    type:    'GET_TODOS',
+    type: 'GET_TODOS',
     promise: request.get(API_URL)
   }
 }
 
 export function createTodo(text) {
   return {
-    type:    'CREATE_TODO',
+    type: 'CREATE_TODO',
     promise: request.post(API_URL, { time: Date.now(), text })
   };
 }

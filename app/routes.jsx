@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import App from './components/index';
-import Home from './components/Home';
+import AppView from './components/app-view';
+import HomeView from './components/home-view';
 
 export default (
-  <Route name="app" component={App} path="/">
-    <IndexRoute component={Home}/>
+  <Route name="app" component={AppView} path="/">
+    <IndexRoute component={HomeView}/>
   </Route>
 );

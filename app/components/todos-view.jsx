@@ -1,6 +1,6 @@
-import React         from 'react';
+import React from 'react';
 import { PropTypes } from 'react';
-import Immutable     from 'immutable';
+import Immutable from 'immutable';
 
 export default class TodosView extends React.Component {
   static propTypes = {
@@ -37,9 +37,10 @@ export default class TodosView extends React.Component {
             return (
               <div style={btnStyle} key={index}>
                 <span>{todo}</span>
-
-                <button style={btnStyle} data-id={index} onClick={this.handleDelete}>X</button>
-                <button style={btnStyle} data-id={index} onClick={this.handleEdit}>Edit</button>
+                &nbsp;
+                <a style={btnStyle} href="javascript:;" data-id={index} onClick={this.handleDelete}>Delete</a>
+                &nbsp;
+                <a style={btnStyle} href="javascript:;" data-id={index} onClick={this.handleEdit}>Edit</a>
               </div>
             );
           }.bind(this))

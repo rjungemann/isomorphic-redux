@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-export default class TodosForm extends React.Component {
+export default class TodosFormView extends React.Component {
   static propTypes = {
     createTodo: PropTypes.func.isRequired
   };

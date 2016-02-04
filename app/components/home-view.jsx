@@ -1,11 +1,11 @@
 import React, { Component , PropTypes } from 'react';
-import TodosView from './TodosView';
-import TodosForm from './TodosForm';
-import { bindActionCreators } from 'redux';
-import * as TodoActions from '../actions/TodoActions';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import TodosView from './todos-view';
+import TodosFormView from './todos-form-view';
+import * as TodoActions from '../actions/todo-actions';
 
-class Home extends Component {
+class HomeView extends Component {
   static propTypes = {
     todos: PropTypes.any.isRequired,
     dispatch: PropTypes.func.isRequired
@@ -21,10 +21,11 @@ class Home extends Component {
     return (
       <div id="todo-list">
         <TodosView todos={todos} {...bindActionCreators(TodoActions, dispatch)}/>
-        <TodosForm {...bindActionCreators(TodoActions, dispatch)}/>
+        <hr/>
+        <TodosFormView {...bindActionCreators(TodoActions, dispatch)}/>
       </div>
     );
   }
 }
 
-export default connect(state => ({ todos: state.todos }))(Home)
+export default connect(state => ({ todos: state.todos }))(HomeView)

@@ -8,6 +8,8 @@ import bodyParser from 'body-parser'
 import uiHandler from './handlers/ui-handler'
 import todosIndexHandler from './handlers/api/v1/todos/index-handler'
 import todosCreateHandler from './handlers/api/v1/todos/create-handler'
+import todosUpdateHandler from './handlers/api/v1/todos/update-handler'
+import todosDeleteHandler from './handlers/api/v1/todos/delete-handler'
 
 global.IS_BROWSER = false;
 
@@ -27,6 +29,8 @@ app.use(bodyParser.json());
 // Handle API routes.
 app.get('/api/v1/todos', todosIndexHandler());
 app.post('/api/v1/todos', todosCreateHandler());
+app.put('/api/v1/todos/:id', todosUpdateHandler());
+app.delete('/api/v1/todos/:id', todosDeleteHandler());
 
 // Handle UI routes.
 app.use(uiHandler());

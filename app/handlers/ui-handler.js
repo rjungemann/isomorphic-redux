@@ -43,6 +43,7 @@ export default function uiHandler () {
 
               <link rel="stylesheet" href="/stylesheets/tether.min.css">
               <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+              <link rel="stylesheet" href="/stylesheets/main.css">
 
               <script src="/javascripts/jquery.min.js"></script>
               <script src="/javascripts/tether.min.js"></script>

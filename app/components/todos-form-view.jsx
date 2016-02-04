@@ -15,9 +15,14 @@ export default class TodosFormView extends React.Component {
 
   render() {
     return (
-      <div>
-        <input type="text" placeholder="type todo" ref="todo-input" />
-        <input type="submit" value="OK!" onClick={this.handleSubmit} />
+      <div className="well">
+        <form>
+          <fieldset className="form-group">
+            <input className="form-control" id="todo" type="text" placeholder="What would you like to get done?" ref="todo-input"/>
+          </fieldset>
+
+          <input className="btn btn-primary" type="submit" value="OK!" onClick={this.handleSubmit}/>
+        </form>
       </div>
     );
   }

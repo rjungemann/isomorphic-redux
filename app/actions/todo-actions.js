@@ -16,18 +16,21 @@ export function createTodo(text) {
   };
 }
 
-export function editTodo(id, text) {
+export function editTodo(id, oldText, text) {
   return {
     type: 'EDIT_TODO',
     id,
     text,
-    date: Date.now()
+    date: Date.now(),
+    promise: request.put(`${API_URL}/${id}`, { id, text, old_text: oldText })
   };
 }
 
-export function deleteTodo(id) {
+export function deleteTodo(id, text) {
   return {
     type: 'DELETE_TODO',
-    id
+    id,
+    text,
+    promise: request.delete(`${API_URL}/${id}`, { params: { id, text }})
   };
 }

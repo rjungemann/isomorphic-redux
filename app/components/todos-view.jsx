@@ -10,19 +10,21 @@ export default class TodosView extends React.Component {
   };
 
   handleDelete = (e) => {
-    const id = Number(e.target.dataset.id);
+    const id = e.target.dataset.id;
+    const text = e.target.dataset.text;
 
-    this.props.deleteTodo(id);
+    this.props.deleteTodo(id, text);
   };
 
   handleEdit = (e) => {
     const id = Number(e.target.dataset.id);
+    const oldText = e.target.dataset.text;
     const currentVal = this.props.todos.get(id);
 
     // For a cutting edge UX
     let text = window.prompt('', currentVal);
 
-    this.props.editTodo(id, text);
+    this.props.editTodo(id, oldText, text);
   };
 
   render() {
@@ -44,9 +46,9 @@ export default class TodosView extends React.Component {
                     <td>{todo}</td>
 
                     <td>
-                      <button className="btn btn-sm btn-danger" data-id={index} onClick={this.handleDelete}>Delete</button>
+                      <button className="btn btn-sm btn-danger" data-id={index} data-text={todo} onClick={this.handleDelete}>Delete</button>
                       &nbsp;
-                      <button className="btn btn-sm btn-warning" data-id={index} onClick={this.handleEdit}>Edit</button>
+                      <button className="btn btn-sm btn-warning" data-id={index} data-text={todo} onClick={this.handleEdit}>Edit</button>
                     </td>
                   </tr>
                 );

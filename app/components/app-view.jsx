@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import NavbarView from './navbar-view';
-import NavbarItemView from './navbar-item-view';
 
 export default class AppView extends React.Component {
   static propTypes = {
@@ -8,16 +7,16 @@ export default class AppView extends React.Component {
   };
 
   render () {
+    const containerStyle = {
+      marginTop: '64px'
+    };
+
     return (
       <div id="app-view">
-        <NavbarView>
-          <NavbarItemView title="Home" href="/"/>
-          <NavbarItemView title="Sign In" href="/users/signin"/>
-        </NavbarView>
-
-        <h1>Redux Demo</h1>
-
-        {this.props.children}
+        <NavbarView path={this.props.location.pathname}/>
+        <div className="container" style={containerStyle}>
+          {this.props.children}
+        </div>
       </div>
     );
   }

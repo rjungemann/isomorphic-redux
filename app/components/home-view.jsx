@@ -22,20 +22,25 @@ class HomeView extends Component {
   render () {
     const { todos, dispatch } = this.props;
 
-    console.log(todos, todos.size);
-
     if (todos.size) {
       return (
         <div id="home-view">
+          <h1>Todos</h1>
+
           <TodosView todos={todos} {...bindActionCreators(TodoActions, dispatch)}/>
-          <hr/>
           <TodosFormView {...bindActionCreators(TodoActions, dispatch)}/>
         </div>
       );
     } else {
       dispatch(TodoActions.getTodos());
 
-      return <p>Loading...</p>;
+      return (
+        <div id="home-view">
+          <h1>Todos</h1>
+
+          <p>Loading...</p>
+        </div>
+      );
     }
   }
 }

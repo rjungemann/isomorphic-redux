@@ -5,8 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production NODE_PATH=$NODE_PATH:./shared node --harmony .",
-    "dev": "NODE_PATH=$NODE_PATH:./shared node --harmony .",
+    "start": "NODE_ENV=production NODE_PATH=$NODE_PATH:./app node --harmony .",
+    "dev": "NODE_PATH=$NODE_PATH:./app nodemon -e js,jsx --debug --harmony .",
     "build": "NODE_ENV=production webpack --progress --color -p --config webpack.prod.config.js",
     "db:create": "node scripts/db/create.js",
     "db:drop": "node scripts/db/drop.js",
@@ -29,6 +29,7 @@
     "express": "^4.13.3",
     "history": "^1.17.0",
     "immutable": "^3.7.6",
+    "livereload": "^0.4.1",
     "node-pg-migrate": "0.0.9",
     "object-assign": "^4.0.1",
     "pg": "^4.4.4",
@@ -46,6 +47,7 @@
     "eslint": "^1.10.3",
     "eslint-plugin-react": "^3.12.0",
     "node-pg-migrate": "0.0.9",
+    "nodemon": "^1.8.1",
     "react-transform-hmr": "^1.0.1",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-hot-middleware": "^2.6.4"

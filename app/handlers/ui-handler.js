@@ -38,7 +38,15 @@ export default function uiHandler () {
           <html>
             <head>
               <meta charset="utf-8">
-              <title>Redux Demo</title>
+
+              <title>Isomorphic Redux</title>
+
+              <link rel="stylesheet" href="/stylesheets/tether.min.css">
+              <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+
+              <script src="/javascripts/jquery.min.js"></script>
+              <script src="/javascripts/tether.min.js"></script>
+              <script src="/javascripts/bootstrap.min.js"></script>
 
               <script>
                 window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};

@@ -15,13 +15,7 @@ const BABEL_QUERY = {
     [
       'react-transform',
       {
-        transforms: [
-          {
-            transform: 'react-transform-hmr',
-            imports: ['react'],
-            locals: ['module']
-          }
-        ]
+        transforms: []
       }
     ]
   ]
@@ -31,7 +25,6 @@ export default function(app) {
   const config = Object.assign(prodCfg, {
     devtool: 'inline-source-map',
     entry: [
-      'webpack-hot-middleware/client',
       './app/client'
     ],
     module: {
@@ -46,7 +39,6 @@ export default function(app) {
     },
     plugins: [
       new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin()
     ],
   });

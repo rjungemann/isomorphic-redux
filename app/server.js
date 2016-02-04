@@ -9,6 +9,8 @@ import uiHandler from './handlers/ui-handler'
 import todosIndexHandler from './handlers/api/v1/todos/index-handler'
 import todosCreateHandler from './handlers/api/v1/todos/create-handler'
 
+global.IS_BROWSER = false;
+
 const app = express();
 
 if (config.nodeEnv !== 'production') {

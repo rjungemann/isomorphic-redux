@@ -16,7 +16,7 @@ export default class TodosView extends React.Component {
   };
 
   handleEdit = (e) => {
-    const id         = Number(e.target.dataset.id);
+    const id = Number(e.target.dataset.id);
     const currentVal = this.props.todos.get(id);
 
     // For a cutting edge UX
@@ -26,25 +26,34 @@ export default class TodosView extends React.Component {
   };
 
   render() {
-    const btnStyle = {
-      /* 'margin': '1em 0 1em 1em' */
-    };
-
     return (
-      <div id="todos-list">
-        {
-          this.props.todos.map(function (todo, index) {
-            return (
-              <div style={btnStyle} key={index}>
-                <span>{todo}</span>
-                &nbsp;
-                <a style={btnStyle} href="javascript:;" data-id={index} onClick={this.handleDelete}>Delete</a>
-                &nbsp;
-                <a style={btnStyle} href="javascript:;" data-id={index} onClick={this.handleEdit}>Edit</a>
-              </div>
-            );
-          }.bind(this))
-        }
+      <div id="todos-list" className="table-responsive">
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {
+              this.props.todos.map(function (todo, index) {
+                return (
+                  <tr key={index}>
+                    <td>{todo}</td>
+
+                    <td>
+                      <button className="btn btn-sm btn-danger" data-id={index} onClick={this.handleDelete}>Delete</button>
+                      &nbsp;
+                      <button className="btn btn-sm btn-warning" data-id={index} onClick={this.handleEdit}>Edit</button>
+                    </td>
+                  </tr>
+                );
+              }.bind(this))
+            }
+          </tbody>
+        </table>
       </div>
     );
   }

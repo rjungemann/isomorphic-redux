@@ -38,7 +38,12 @@ export default function uiHandler () {
           <html>
             <head>
               <meta charset="utf-8">
-              <title>Redux Demo</title>
+
+              <title>Isomorphic Redux</title>
+
+              <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+
+              <script src="/javascripts/bootstraps.min.js"></script>
 
               <script>
                 window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};

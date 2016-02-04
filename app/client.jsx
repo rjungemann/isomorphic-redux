@@ -7,6 +7,8 @@ import routes from 'routes';
 import configureStore from 'configure-store'
 import immutifyState from 'lib/immutify-state';
 
+window.IS_BROWSER = true;
+
 const initialState = immutifyState(window.__INITIAL_STATE__);
 const store = configureStore(initialState, browserHistory);
 

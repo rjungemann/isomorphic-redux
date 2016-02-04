@@ -15,17 +15,29 @@ class HomeView extends Component {
     TodoActions.getTodos
   ];
 
-  render() {
+  componentWillMount () {
+
+  }
+
+  render () {
     const { todos, dispatch } = this.props;
 
-    return (
-      <div id="todo-list">
-        <TodosView todos={todos} {...bindActionCreators(TodoActions, dispatch)}/>
-        <hr/>
-        <TodosFormView {...bindActionCreators(TodoActions, dispatch)}/>
-      </div>
-    );
+    console.log(todos, todos.size);
+
+    if (todos.size) {
+      return (
+        <div id="home-view">
+          <TodosView todos={todos} {...bindActionCreators(TodoActions, dispatch)}/>
+          <hr/>
+          <TodosFormView {...bindActionCreators(TodoActions, dispatch)}/>
+        </div>
+      );
+    } else {
+      dispatch(TodoActions.getTodos());
+
+      return <p>Loading...</p>;
+    }
   }
 }
 
-export default connect(state => ({ todos: state.todos }))(HomeView)
+export default connect(state => ({ todos: state.todos }))(HomeView);

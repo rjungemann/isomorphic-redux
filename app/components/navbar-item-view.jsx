@@ -1,4 +1,7 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router'
+import { routeActions } from 'react-router-redux'
 
 export default class NavbarItemView extends React.Component {
   static propTypes = {
@@ -7,10 +10,14 @@ export default class NavbarItemView extends React.Component {
   };
 
   render () {
+    const { title, href } = this.props;
+
     return (
       <li>
-        <a href={this.props.href}>{this.props.title}</a>
+        <Link to={href}>{title}</Link>
       </li>
     )
   }
 }
+
+export default connect((state) => state, routeActions)(NavbarItemView);

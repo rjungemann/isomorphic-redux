@@ -12,6 +12,7 @@ export default class AppView extends React.Component {
       <div id="app-view">
         <NavbarView>
           <NavbarItemView title="Home" href="/"/>
+          <NavbarItemView title="Sign In" href="/users/signin"/>
         </NavbarView>
 
         <h1>Redux Demo</h1>

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 export default class NavbarView extends React.Component {
   static propTypes = {
-    children: PropTypes.object
+    children: PropTypes.array
   };
 
   render () {

@@ -1,12 +1,12 @@
 function check() {
-  curl localhost:5000/api/v1/ping >/dev/null 2>&1
+  curl -sL -w "%{http_code}\\n" http://localhost:5000/api/v1/ping -o /dev/null
 }
 
-check
-while [ $? -ne 0 ]; do
-  echo 'Waiting for server to restart before reloading...'
-  sleep 1
-  check
+echo 'Waiting for server to restart before reloading...'
+
+sleep 1
+while [ `check` -ne '200' ]; do
+  sleep 0.25
 done
 
 echo 'Server is started. Reloading...'

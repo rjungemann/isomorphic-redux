@@ -28,6 +28,7 @@ class HomeView extends Component {
           <h1>Todos</h1>
 
           <TodosView todos={todos} {...bindActionCreators(TodoActions, dispatch)}/>
+          <hr/>
           <TodosFormView {...bindActionCreators(TodoActions, dispatch)}/>
         </div>
       );

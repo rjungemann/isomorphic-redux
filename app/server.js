@@ -1,15 +1,15 @@
 import express from 'express';
 import path from 'path';
-import config from '../config'
-import webpackDev from '../webpack.dev'
-import bodyParser from 'body-parser'
+import config from '../config';
+import webpackDev from '../webpack.dev';
+import bodyParser from 'body-parser';
 
 // Handlers
-import uiHandler from './handlers/ui-handler'
-import todosIndexHandler from './handlers/api/v1/todos/index-handler'
-import todosCreateHandler from './handlers/api/v1/todos/create-handler'
-import todosUpdateHandler from './handlers/api/v1/todos/update-handler'
-import todosDeleteHandler from './handlers/api/v1/todos/delete-handler'
+import uiHandler from './handlers/ui-handler';
+import todosIndexHandler from './handlers/api/v1/todos/index-handler';
+import todosCreateHandler from './handlers/api/v1/todos/create-handler';
+import todosUpdateHandler from './handlers/api/v1/todos/update-handler';
+import todosDeleteHandler from './handlers/api/v1/todos/delete-handler';
 
 global.IS_BROWSER = false;
 

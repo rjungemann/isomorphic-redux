@@ -1,7 +1,7 @@
 import React, { Component , PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-class UsersSigninView extends Component {
+class UsersNewView extends Component {
   static propTypes = {
   };
 
@@ -24,6 +24,11 @@ class UsersSigninView extends Component {
             <input type="password" className="form-control" id="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"/>
           </fieldset>
 
+          <fieldset className="form-group">
+            <label htmlFor="password-confirm">Confirm Password</label>
+            <input type="password" className="form-control" id="password-confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"/>
+          </fieldset>
+
           <button type="submit" className="btn btn-primary">Sign In</button>
         </form>
       </div>
@@ -31,4 +36,4 @@ class UsersSigninView extends Component {
   }
 }
 
-export default connect(state => ({}))(UsersSigninView);
+export default connect(state => ({}))(UsersNewView);

@@ -29,6 +29,10 @@ export default class NavbarView extends React.Component {
           <li className={this.classNamesFor('/users/signin')}>
             <Link className="nav-link" to="/users/signin">Sign In</Link>
           </li>
+
+          <li className={this.classNamesFor('/users/new')}>
+            <Link className="nav-link" to="/users/new">Sign Up</Link>
+          </li>
         </ul>
       </nav>
     );

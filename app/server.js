@@ -3,9 +3,12 @@ import path from 'path';
 import config from '../config';
 import webpackDev from '../webpack.dev';
 import bodyParser from 'body-parser';
+import session from 'express-session';
+import connectRedis from 'connect-redis';
 
 // Handlers
 import uiHandler from './handlers/ui-handler';
+import pingIndexHandler from './handlers/api/v1/ping/index-handler';
 import todosIndexHandler from './handlers/api/v1/todos/index-handler';
 import todosCreateHandler from './handlers/api/v1/todos/create-handler';
 import todosUpdateHandler from './handlers/api/v1/todos/update-handler';
@@ -27,9 +30,20 @@ app.set('store', {
 });
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(
+  session({
+    resave: true,
+    saveUninitialized: false,
+    store: new (connectRedis(session))({
+      url: config.redisUrl
+    }),
+    secret: config.secret
+  })
+);
 app.use(bodyParser.json());
 
 // Handle API routes.
+app.get('/api/v1/ping', pingIndexHandler());
 app.get('/api/v1/todos', todosIndexHandler());
 app.post('/api/v1/todos', todosCreateHandler());
 app.put('/api/v1/todos/:id', todosUpdateHandler());

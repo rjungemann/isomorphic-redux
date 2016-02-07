@@ -1,30 +1,26 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { PropTypes } from 'react';
 import Immutable from 'immutable';
 
 export default class TodosView extends React.Component {
   static propTypes = {
-    todos: PropTypes.instanceOf(Immutable.List).isRequired,
+    todos: PropTypes.any.isRequired,
     updateTodo: PropTypes.func.isRequired,
     destroyTodo: PropTypes.func.isRequired
   };
 
   handleDelete = (e) => {
     const id = e.target.dataset.id;
-    const text = e.target.dataset.text;
 
-    this.props.destroyTodo(id, text);
+    this.props.destroyTodo(id);
   };
 
   handleEdit = (e) => {
     const id = Number(e.target.dataset.id);
-    const oldText = e.target.dataset.text;
-    const currentVal = this.props.todos.get(id);
+    let text = window.prompt('', this.props.todos[id]);
 
-    // For a cutting edge UX
-    let text = window.prompt('', currentVal);
-
-    this.props.updateTodo(id, oldText, text);
+    this.props.updateTodo(id, text);
   };
 
   render() {
@@ -40,15 +36,18 @@ export default class TodosView extends React.Component {
 
           <tbody>
             {
-              this.props.todos.map(function (todo, index) {
+              this.props.todos.map(function (todo) {
+                const id = todo.id;
+                const text = todo.text;
+
                 return (
-                  <tr key={index}>
-                    <td>{todo}</td>
+                  <tr key={id}>
+                    <td>{text}</td>
 
                     <td>
-                      <button className="btn btn-sm btn-danger" data-id={index} data-text={todo} onClick={this.handleDelete}>Delete</button>
+                      <button className="btn btn-sm btn-danger" data-id={id} onClick={this.handleDelete}>Delete</button>
                       &nbsp;
-                      <button className="btn btn-sm btn-warning" data-id={index} data-text={todo} onClick={this.handleEdit}>Edit</button>
+                      <button className="btn btn-sm btn-warning" data-id={id} onClick={this.handleEdit}>Edit</button>
                     </td>
                   </tr>
                 );
@@ -60,3 +59,5 @@ export default class TodosView extends React.Component {
     );
   }
 }
+
+export default connect(state => ({ todos: state.todos }))(TodosView);

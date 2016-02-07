@@ -1,15 +1,21 @@
-import config from '../../../../../config';
+import * as Todos from '../../../../models/todos';
 
 export default function () {
   return (req, res) => {
-    const store = req.app.get('store');
-    const text = req.body.text;
-    const time = req.body.time;
-
-    store.todos.push(text);
-
-    res.json({
-      text: text
-    });
+    Todos
+      .create(req.body.text)
+      .then((todo) => {
+        res.json({
+          message: 'Created user.',
+          todo: todo
+        });
+      })
+      .catch((err) => {
+        res
+          .status(400)
+          .json({
+            message: err.message
+          });
+      });
   };
 };

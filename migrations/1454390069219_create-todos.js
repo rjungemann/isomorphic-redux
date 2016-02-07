@@ -1,7 +1,7 @@
 exports.up = function (pgm, done) {
   pgm.createTable('todos', {
     id: 'id',
-    title: 'varchar(255)'
+    text: 'varchar(255)'
   });
   done();
 };

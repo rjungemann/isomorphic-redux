@@ -7,6 +7,11 @@ export default function () {
   return (req, res) => {
     pg.connect(config.databaseUrl, (err, client, done) => {
       if (err) {
+        res
+          .status(400)
+          .json({
+            message: 'Error connecting to database.'
+          });
         return console.error('Error fetching client from pool.', err);
       }
 

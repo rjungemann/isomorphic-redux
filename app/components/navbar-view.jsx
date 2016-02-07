@@ -29,17 +29,17 @@ export default class NavbarView extends React.Component {
 
   render () {
     const user = this.props.user;
-    const userSigninLink = user.isEmpty() ?
+    const userSigninLink = user ?
       <li className={this.classNamesFor('/users/signin')}>
         <Link className="nav-link" to="/users/signin">Sign In</Link>
       </li> :
       null;
-    const userCreateLink = user.isEmpty() ?
+    const userCreateLink = user ?
       <li className={this.classNamesFor('/users/new')}>
         <Link className="nav-link" to="/users/new">Sign Up</Link>
       </li> :
       null;
-    const userSignoutLink = !user.isEmpty() ?
+    const userSignoutLink = !user ?
       <li className="nav-item">
         <a className="nav-link" href="javascript:;" onClick={this.handleSignout}>Sign Out</a>
       </li> :

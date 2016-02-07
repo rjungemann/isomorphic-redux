@@ -1,9 +1,21 @@
+import * as Todos from '../../../../models/todos';
+
 export default function todosIndexHandler () {
   return (req, res) => {
-    const store = req.app.get('store');
-
-    res.json({
-      todos: store.todos
-    });
-  }
+    Todos
+      .all()
+      .then((todos) => {
+        res.json({
+          message: 'Fetched todos.',
+          todos: todos
+        });
+      })
+      .catch((err) => {
+        res
+          .status(400)
+          .json({
+            message: err.message
+          });
+      });
+  };
 }

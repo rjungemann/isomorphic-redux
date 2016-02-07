@@ -5,12 +5,14 @@ export default class TodosFormView extends React.Component {
     createTodo: PropTypes.func.isRequired
   };
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
     let node = this.refs['todo-input'];
 
     this.props.createTodo(node.value);
 
     node.value = '';
+
+    e.preventDefault();
   };
 
   render() {

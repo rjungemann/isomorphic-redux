@@ -23,10 +23,6 @@ if (config.nodeEnv !== 'production') {
   webpackDev(app);
 }
 
-app.set('store', {
-  todos: ['Foo', 'Bar', 'Baz']
-});
-
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(
   session({

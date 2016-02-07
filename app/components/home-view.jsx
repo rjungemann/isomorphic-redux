@@ -18,7 +18,7 @@ class HomeView extends Component {
   render () {
     const { todos, dispatch } = this.props;
 
-    if (todos.size) {
+    if (todos.length) {
       return (
         <div id="home-view">
           <h1>Todos</h1>

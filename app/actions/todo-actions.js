@@ -16,21 +16,20 @@ export function createTodo(text) {
   };
 }
 
-export function updateTodo(id, oldText, text) {
+export function updateTodo(id, text) {
   return {
     type: 'UPDATE_TODO',
     id,
     text,
     date: Date.now(),
-    promise: request.put(`${API_URL}/${id}`, { id, text, old_text: oldText })
+    promise: request.put(`${API_URL}/${id}`, { id, text })
   };
 }
 
-export function destroyTodo(id, text) {
+export function destroyTodo(id) {
   return {
     type: 'DESTROY_TODO',
     id,
-    text,
-    promise: request.delete(`${API_URL}/${id}`, { params: { id, text }})
+    promise: request.delete(`${API_URL}/${id}`, { params: { id }})
   };
 }

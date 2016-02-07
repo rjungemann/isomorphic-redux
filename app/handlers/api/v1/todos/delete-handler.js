@@ -1,19 +1,20 @@
+import * as Todos from '../../../../models/todos';
+
 export default function todosDeleteHandler () {
   return (req, res) => {
-    const store = req.app.get('store');
-    const text = req.query.text;
-    const newTodos = [];
-
-    store.todos.forEach((element) => {
-      if (element !== text) {
-        newTodos.push(element);
-      }
-    });
-
-    store.todos = newTodos;
-
-    res.json({
-      todos: store.todos
-    });
-  }
+    Todos
+      .destroy(req.params.id)
+      .then(() => {
+        res.json({
+          message: 'Destroyed todo.'
+        });
+      })
+      .catch((err) => {
+        res
+          .status(400)
+          .json({
+            message: err.message
+          });
+      });
+  };
 }

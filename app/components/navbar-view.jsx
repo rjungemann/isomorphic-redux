@@ -1,5 +1,6 @@
 import React, { Component , PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { routeActions } from 'react-router-redux'
 import { Link } from 'react-router';
 import * as UserActions from '../actions/user-actions';
 
@@ -29,17 +30,17 @@ export default class NavbarView extends React.Component {
 
   render () {
     const user = this.props.user;
-    const userSigninLink = user ?
+    const userSigninLink = !user.username ?
       <li className={this.classNamesFor('/users/signin')}>
         <Link className="nav-link" to="/users/signin">Sign In</Link>
       </li> :
       null;
-    const userCreateLink = user ?
+    const userCreateLink = !user.username ?
       <li className={this.classNamesFor('/users/new')}>
         <Link className="nav-link" to="/users/new">Sign Up</Link>
       </li> :
       null;
-    const userSignoutLink = !user ?
+    const userSignoutLink = user.username ?
       <li className="nav-item">
         <a className="nav-link" href="javascript:;" onClick={this.handleSignout}>Sign Out</a>
       </li> :

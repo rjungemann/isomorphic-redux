@@ -1,9 +1,6 @@
-import Immutable from 'immutable';
 import * as TodoActions from '../actions/todo-actions';
 
-const defaultState = new Immutable.List();
-
-export default function todoReducer(state = defaultState, action) {
+export default function todoReducer(state = [], action) {
   switch(action.type) {
     case 'LIST_TODOS':
       return action.res.data.todos;

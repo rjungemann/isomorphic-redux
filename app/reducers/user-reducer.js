@@ -1,16 +1,13 @@
-import Immutable from 'immutable';
 import * as TodoActions from '../actions/todo-actions';
 
-const defaultState = new Immutable.List();
-
-export default function userReducer(state = defaultState, action) {
+export default function userReducer(state = {}, action) {
   switch(action.type) {
     case 'SIGNIN_USER':
-      return new action.res.data.user;
+      return action.res.data.user;
     case 'SIGNOUT_USER':
-      return undefined;
+      return {};
     case 'CREATE_USER':
-      return new action.res.data.user;
+      return action.res.data.user;
     default:
       return state;
   }

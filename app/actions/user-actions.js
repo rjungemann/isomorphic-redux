@@ -6,7 +6,7 @@ export function createUser (username, password, passwordConfirmation) {
   return {
     type: 'CREATE_USER',
     promise: request
-      .post(API_URL, { username, password, passwordConfirmation })
+      .post(API_URL, { username, password, password_confirmation: passwordConfirmation })
   };
 }
 

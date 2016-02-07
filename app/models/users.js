@@ -4,6 +4,34 @@ import Promise from 'bluebird';
 import config from '../../config';
 import { thirtySix } from '../utils';
 
+export function fromToken (token) {
+  return new Promise((resolve, reject) => {
+    if (!token || (token.hasOwnProperty('length') && token.length === 0)) {
+      return reject(new Error('Token must be provided'));
+    }
+
+    pg.connect(config.databaseUrl, (err, client, done) => {
+      if (err) {
+        return reject(new Error('Error connecting to database.'));
+      }
+
+      client.query('SELECT * FROM users WHERE token = $1', [token], (err, result) => {
+        done();
+
+        if (err) {
+          return reject(new Error('Error fetching user.'));
+        }
+
+        if (!result.rows[0]) {
+          return reject(new Error('No matching user found.'));
+        }
+
+        resolve(result.rows[0]);
+      });
+    });
+  });
+}
+
 export function create (username, password, passwordConfirmation) {
   return new Promise((resolve, reject) => {
     pg.connect(config.databaseUrl, (err, client, done) => {
@@ -23,7 +51,7 @@ export function create (username, password, passwordConfirmation) {
         return reject(new Error('Password and confirmation must match.'));
       }
 
-      client.query('SELECT * FROM users WHERE username=$1', [username], (err, result) => {
+      client.query('SELECT * FROM users WHERE username = $1', [username], (err, result) => {
         done();
 
         if (err) {

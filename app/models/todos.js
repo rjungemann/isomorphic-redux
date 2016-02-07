@@ -2,14 +2,18 @@ import pg from 'pg';
 import Promise from 'bluebird';
 import config from '../../config';
 
-export function all () {
+export function all (user) {
   return new Promise((resolve, reject) => {
+    if (!user) {
+      return reject(new Error('User must be provided.'));
+    }
+
     pg.connect(config.databaseUrl, (err, client, done) => {
       if (err) {
         return reject(new Error('Error connecting to database.'));
       }
 
-      client.query('SELECT * FROM todos', [], (err, result) => {
+      client.query('SELECT * FROM todos WHERE user_id = $1', [user.id], (err, result) => {
         if (err) {
           return reject(new Error('Error fetching todos.', err));
         }
@@ -20,8 +24,12 @@ export function all () {
   });
 }
 
-export function create (text) {
+export function create (user, text) {
   return new Promise((resolve, reject) => {
+    if (!user) {
+      return reject(new Error('User must be provided.'));
+    }
+
     pg.connect(config.databaseUrl, (err, client, done) => {
       if (err) {
         return reject(new Error('Error connecting to database.'));
@@ -31,7 +39,7 @@ export function create (text) {
         return reject(new Error('Text must be provided.'));
       }
 
-      client.query('INSERT INTO todos (text) VALUES ($1) RETURNING *', [text], (err, result) => {
+      client.query('INSERT INTO todos (user_id, text) VALUES ($1, $2) RETURNING *', [user.id, text], (err, result) => {
         if (err) {
           return reject(new Error('Error creating todo.'));
         }
@@ -42,8 +50,12 @@ export function create (text) {
   });
 }
 
-export function update(id, text) {
+export function update(user, id, text) {
   return new Promise((resolve, reject) => {
+    if (!user) {
+      return reject(new Error('User must be provided.'));
+    }
+
     pg.connect(config.databaseUrl, (err, client, done) => {
       if (err) {
         return reject(new Error('Error connecting to database.'));
@@ -68,8 +80,12 @@ export function update(id, text) {
   });
 }
 
-export function destroy (id) {
+export function destroy (user, id) {
   return new Promise((resolve, reject) => {
+    if (!user) {
+      return reject(new Error('User must be provided.'));
+    }
+
     pg.connect(config.databaseUrl, (err, client, done) => {
       if (err) {
         return reject(new Error('Error connecting to database.'));

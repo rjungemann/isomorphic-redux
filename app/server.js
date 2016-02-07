@@ -35,6 +35,17 @@ app.use(
   })
 );
 app.use(bodyParser.json());
+app.use((req, res, next) => {
+  if (req.session && req.session.user) {
+    req.token = req.session.user.token;
+    return next();
+  }
+
+  const authorization = req.get('authorization') || '';
+  const match = authorization.match(/Token ([a-zA-Z0-9]+)$/) || [];
+  req.token = match[1];
+  next();
+});
 
 // Handle API routes.
 app.get('/api/v1/ping', pingIndexHandler());

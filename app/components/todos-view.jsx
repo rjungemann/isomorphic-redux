@@ -24,6 +24,10 @@ export default class TodosView extends React.Component {
   };
 
   render() {
+    if (!this.props.todos.length) {
+      return <p>Loading&hellip;</p>;
+    }
+
     return (
       <div id="todos-list" className="table-responsive">
         <table className="table table-striped">

@@ -2,6 +2,8 @@ import * as TodoActions from '../actions/todo-actions';
 
 export default function todoReducer(state = [], action) {
   switch(action.type) {
+    case 'SIGNOUT_USER':
+      return [];
     case 'LIST_TODOS':
       return action.res.data.todos;
     case 'CREATE_TODO':

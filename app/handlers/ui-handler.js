@@ -9,12 +9,23 @@ import fetchComponentData from '../lib/fetch-component-data';
 import config from '../../config';
 import routes from '../routes';
 import immutifyState from '../lib/immutify-state';
-import * as  Todos from '../models/todos';
+import * as Todos from '../models/todos';
+import * as Users from '../models/users';
 
 export default function uiHandler () {
   return (req, res) => {
-    Todos
-      .all()
+    let promise;
+    if (req.token) {
+      promise = Users
+        .fromToken(req.token)
+        .then((user) => {
+          return Todos.all(user);
+        });
+    } else {
+      promise = Promise.resolve([]);
+    }
+
+    promise
       .then((todos) => {
         const location = createLocation(req.url);
         const history = createMemoryHistory();
@@ -26,7 +37,7 @@ export default function uiHandler () {
 
         match({ routes, location }, (err, redirectLocation, renderProps) => {
           if(err) {
-            console.error(err);
+            console.error(err.stack);
             return res.status(500).end('Internal server error');
           }
 
@@ -86,6 +97,7 @@ export default function uiHandler () {
         });
       })
       .catch((err) => {
+        console.error(err.stack);
         res
           .status(400)
           .json({

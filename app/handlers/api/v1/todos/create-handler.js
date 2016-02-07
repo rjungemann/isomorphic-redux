@@ -1,12 +1,19 @@
+import Promise from 'bluebird';
 import * as Todos from '../../../../models/todos';
+import * as Users from '../../../../models/users';
 
 export default function () {
   return (req, res) => {
-    Todos
-      .create(req.body.text)
+    const text = req.body.text;
+
+    Promise
+      .resolve(Users.fromToken(req.token))
+      .then((user) => {
+        return Todos.create(user, text)
+      })
       .then((todo) => {
         res.json({
-          message: 'Created user.',
+          message: 'Created todo.',
           todo: todo
         });
       })

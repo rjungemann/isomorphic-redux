@@ -25,7 +25,7 @@ if (config.nodeEnv !== 'production') {
 }
 
 app.set('store', {
-  token: undefined,
+  user: undefined,
   todos: ['Foo', 'Bar', 'Baz']
 });
 

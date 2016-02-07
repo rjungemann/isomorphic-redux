@@ -17,3 +17,11 @@ export function signinUser (username, password) {
       .post(`${API_URL}/signin`, { username, password })
   };
 }
+
+export function signoutUser () {
+  return {
+    type: 'SIGNOUT_USER',
+    promise: request
+      .delete(`${API_URL}/signin`)
+  };
+}

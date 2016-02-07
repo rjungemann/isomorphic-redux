@@ -14,6 +14,7 @@ import todosCreateHandler from './handlers/api/v1/todos/create-handler';
 import todosUpdateHandler from './handlers/api/v1/todos/update-handler';
 import todosDeleteHandler from './handlers/api/v1/todos/delete-handler';
 import usersSigninHandler from './handlers/api/v1/users/signin-handler';
+import usersSignoutHandler from './handlers/api/v1/users/signout-handler';
 import usersCreateHandler from './handlers/api/v1/users/create-handler';
 
 global.IS_BROWSER = false;
@@ -48,6 +49,7 @@ app.post('/api/v1/todos', todosCreateHandler());
 app.put('/api/v1/todos/:id', todosUpdateHandler());
 app.delete('/api/v1/todos/:id', todosDeleteHandler());
 app.post('/api/v1/users/signin', usersSigninHandler());
+app.delete('/api/v1/users/signin', usersSignoutHandler());
 app.post('/api/v1/users', usersCreateHandler());
 
 // Handle UI routes.

@@ -1,5 +1,7 @@
 import React, { Component , PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import * as UserActions from '../actions/user-actions';
 
 export default class NavbarView extends React.Component {
   static propTypes = {
@@ -12,6 +14,17 @@ export default class NavbarView extends React.Component {
     }
 
     return 'nav-item';
+  };
+
+  handleSignout = (e) => {
+    let dispatch = this.props.dispatch;
+
+    dispatch(UserActions.signoutUser())
+      .then(() => {
+        return dispatch(routeActions.push('/'));
+      });
+
+    e.preventDefault();
   };
 
   render () {
@@ -28,7 +41,7 @@ export default class NavbarView extends React.Component {
       null;
     const userSignoutLink = !user.isEmpty() ?
       <li className="nav-item">
-        <Link className="nav-link" to="/users/signout">Sign Out</Link>
+        <a className="nav-link" href="javascript:;" onClick={this.handleSignout}>Sign Out</a>
       </li> :
       null;
 
@@ -51,3 +64,5 @@ export default class NavbarView extends React.Component {
     );
   }
 }
+
+export default connect(state => ({ user: state.user }))(NavbarView);

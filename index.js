@@ -2,6 +2,10 @@
 
 var register = require('babel-core/register')
 var config = require('./config');
+
+global.IS_BROWSER = false;
+global.ENV = config;
+
 var server = require('./app/server');
 
 register({});

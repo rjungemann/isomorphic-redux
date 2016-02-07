@@ -1,6 +1,6 @@
 import request from 'axios';
 
-const API_URL = 'http://localhost:5000/api/v1/todos';
+const API_URL = `${ENV.apiEndpoint}/todos`;
 
 export function listTodos() {
   return {

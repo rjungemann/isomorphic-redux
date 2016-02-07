@@ -1,10 +1,10 @@
 import express from 'express';
 import path from 'path';
-import config from '../config';
 import webpackDev from '../webpack.dev';
 import bodyParser from 'body-parser';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
+import config from '../config'
 
 // Handlers
 import uiHandler from './handlers/ui-handler';
@@ -16,8 +16,6 @@ import todosDeleteHandler from './handlers/api/v1/todos/delete-handler';
 import usersSigninHandler from './handlers/api/v1/users/signin-handler';
 import usersSignoutHandler from './handlers/api/v1/users/signout-handler';
 import usersCreateHandler from './handlers/api/v1/users/create-handler';
-
-global.IS_BROWSER = false;
 
 const app = express();
 

@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { RouterContext, match, createMemoryHistory } from 'react-router';
 import configureStore from '../configure-store'
 import fetchComponentData from '../lib/fetch-component-data';
+import config from '../../config';
 import routes from '../routes';
 import immutifyState from '../lib/immutify-state';
 
@@ -37,6 +38,9 @@ export default function uiHandler () {
 
         const componentHTML = renderToString(InitialView);
         const initialState = store.getState();
+        const env = {
+          apiEndpoint: config.apiEndpoint
+        }
 
         return `
           <!DOCTYPE html>
@@ -58,6 +62,7 @@ export default function uiHandler () {
 
               <script>
                 window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
+                window.ENV = ${JSON.stringify(env)};
               </script>
             </head>
 

@@ -1,6 +1,6 @@
 import request from 'axios';
 
-const API_URL = 'http://localhost:5000/api/v1/users';
+const API_URL = `${ENV.apiEndpoint}/users`;
 
 export function createUser (username, password, passwordConfirmation) {
   return {

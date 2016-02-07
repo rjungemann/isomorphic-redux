@@ -6,12 +6,17 @@ import { RouterContext, match, createMemoryHistory } from 'react-router';
 import configureStore from '../configure-store'
 import fetchComponentData from '../lib/fetch-component-data';
 import routes from '../routes';
+import immutifyState from '../lib/immutify-state';
 
 export default function uiHandler () {
   return (req, res) => {
     const location = createLocation(req.url);
     const history = createMemoryHistory();
-    const store = configureStore(undefined, history);
+    const initialState = immutifyState({
+      user: req.session.user,
+      todos: undefined
+    });
+    const store = configureStore(initialState, history);
 
     match({ routes, location }, (err, redirectLocation, renderProps) => {
       if(err) {

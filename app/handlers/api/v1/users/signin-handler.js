@@ -13,8 +13,6 @@ export default function () {
       const username = req.body.username;
       const password = req.body.password;
 
-      console.log('username', username, password);
-
       client.query('SELECT * FROM users WHERE username=$1', [username], (err, result) => {
         done();
 
@@ -28,9 +26,6 @@ export default function () {
         }
 
         const user = result.rows[0];
-
-        console.log('user', user);
-
         if (!user) {
           return res
             .status(404)
@@ -40,8 +35,6 @@ export default function () {
         }
 
         bcrypt.compare(password, user.encrypted_password, function (err, isMatch) {
-          console.log('bcrypt', err, isMatch);
-
           if (err) {
             res
               .status(400)
@@ -59,7 +52,7 @@ export default function () {
               });
           }
 
-          console.log('Sending...', user);
+          req.session.user = user;
 
           res
             .json({

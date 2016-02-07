@@ -15,10 +15,6 @@ class HomeView extends Component {
     TodoActions.listTodos
   ];
 
-  componentWillMount () {
-
-  }
-
   render () {
     const { todos, dispatch } = this.props;
 
@@ -33,7 +29,7 @@ class HomeView extends Component {
         </div>
       );
     } else {
-      dispatch(TodoActions.todoList());
+      dispatch(TodoActions.listTodos());
 
       return (
         <div id="home-view">

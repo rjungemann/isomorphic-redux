@@ -94,10 +94,14 @@ export default function () {
                   return console.error('Error fetching user after create.', err);
                 }
 
+                const user = result.rows[0];
+
+                req.session.user = user;
+
                 res
                   .json({
                     message: 'Created user.',
-                    user: result.rows[0]
+                    user: user
                   });
                 });
               });

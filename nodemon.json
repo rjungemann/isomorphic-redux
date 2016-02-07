@@ -12,7 +12,8 @@
     "restart": "scripts/notify-nodemon.sh"
   },
   "env": {
-    "NODE_ENV": "development"
+    "NODE_ENV": "development",
+    "DEBUG": "express:*"
   },
   "ext": "js jsx"
 }

@@ -1,5 +1,6 @@
 import React, { Component , PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { routeActions } from 'react-router-redux'
 import * as UserActions from '../actions/user-actions';
 
 class UsersSigninView extends Component {
@@ -11,15 +12,16 @@ class UsersSigninView extends Component {
   ];
 
   handleSignin = (e) => {
+    let dispatch = this.props.dispatch;
+    let username = this.refs['username-input'].value;
+    let password = this.refs['password-input'].value;
+
+    dispatch(UserActions.signinUser(username, password))
+      .then(() => {
+        return dispatch(routeActions.push('/'));
+      });
+
     e.preventDefault();
-
-    let username = this.refs['username-input'];
-    let password = this.refs['password-input'];
-
-    this.props.dispatch(UserActions.signinUser(username.value, password.value));
-
-    username.value = '';
-    password.value = '';
   };
 
   render () {

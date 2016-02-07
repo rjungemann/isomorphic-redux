@@ -12,7 +12,7 @@ class HomeView extends Component {
   };
 
   static needs = [
-    TodoActions.getTodos
+    TodoActions.listTodos
   ];
 
   componentWillMount () {
@@ -33,7 +33,7 @@ class HomeView extends Component {
         </div>
       );
     } else {
-      dispatch(TodoActions.getTodos());
+      dispatch(TodoActions.todoList());
 
       return (
         <div id="home-view">

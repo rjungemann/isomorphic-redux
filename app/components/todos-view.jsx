@@ -5,15 +5,15 @@ import Immutable from 'immutable';
 export default class TodosView extends React.Component {
   static propTypes = {
     todos: PropTypes.instanceOf(Immutable.List).isRequired,
-    editTodo: PropTypes.func.isRequired,
-    deleteTodo: PropTypes.func.isRequired
+    updateTodo: PropTypes.func.isRequired,
+    destroyTodo: PropTypes.func.isRequired
   };
 
   handleDelete = (e) => {
     const id = e.target.dataset.id;
     const text = e.target.dataset.text;
 
-    this.props.deleteTodo(id, text);
+    this.props.destroyTodo(id, text);
   };
 
   handleEdit = (e) => {
@@ -24,7 +24,7 @@ export default class TodosView extends React.Component {
     // For a cutting edge UX
     let text = window.prompt('', currentVal);
 
-    this.props.editTodo(id, oldText, text);
+    this.props.updateTodo(id, oldText, text);
   };
 
   render() {

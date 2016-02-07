@@ -94,8 +94,6 @@ export default function () {
                   return console.error('Error fetching user after create.', err);
                 }
 
-                console.log(result.rows[0]);
-
                 res
                   .json({
                     message: 'Created user.',

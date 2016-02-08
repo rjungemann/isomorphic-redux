@@ -15,7 +15,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.8.1",
-    "babel": "^6.3.13",
+    "babel": "^6.5.1",
     "babel-core": "^6.4.5",
     "babel-loader": "^6.2.0",
     "babel-plugin-react-transform": "^2.0.0-beta1",

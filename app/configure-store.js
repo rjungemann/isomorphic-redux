@@ -1,3 +1,4 @@
+import deepFreeze from 'deep-freeze'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import createLogger from 'redux-logger';
 import { syncHistory, routeReducer } from 'react-router-redux';
@@ -12,6 +13,11 @@ export default function configureStore(initialState, history) {
   const middleware = [
     applyMiddleware(router),
     applyMiddleware(promiseMiddleware),
+    applyMiddleware(store => next => action => {
+      deepFreeze(store.getState());
+      next(action);
+      deepFreeze(store.getState());
+    })
   ];
 
   if (IS_BROWSER) {

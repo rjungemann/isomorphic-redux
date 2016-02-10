@@ -30,6 +30,7 @@
     "bluebird": "^3.2.2",
     "body-parser": "^1.14.2",
     "connect-redis": "^3.0.2",
+    "deep-freeze": "0.0.1",
     "express": "^4.13.3",
     "express-session": "^1.13.0",
     "history": "^1.17.0",
